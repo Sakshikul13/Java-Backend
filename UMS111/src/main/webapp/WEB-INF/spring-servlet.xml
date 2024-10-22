@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- Enable annotation-driven MVC -->
+    <mvc:annotation-driven />
+
+    <!-- Component scan for Controller package -->
+    <context:component-scan base-package="com.pu.controller" />
+
+    <!-- View resolver configuration -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <!-- Data source configuration -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/ums2?createDatabaseIfNotExist=true" />
+        <property name="username" value="root" />
+        <property name="password" value="root" />
+    </bean>
+
+    <!-- JDBC template configuration -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- Bean definition for CourseDao -->
+    <bean id="courseDao" class="com.pu.repositories.CourseDao">
+        <property name="template" ref="jdbcTemplate" />
+    </bean>
+    <bean id="courseDetailsDao" class="com.pu.repositories.Course_detailsDao">
+        <property name="template" ref="jdbcTemplate" />
+    </bean>
+    
+    <bean id="EnrollmentDao" class="com.pu.repositories.EnrollmentDao">
+        <property name="template" ref="jdbcTemplate" />
+    </bean>
+    <bean id="StudentDao" class="com.pu.repositories.StudentDao">
+        <property name="template" ref="jdbcTemplate" />
+    </bean>
+</beans>

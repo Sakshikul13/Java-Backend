@@ -1,0 +1,41 @@
+package com.falsk.rps;
+
+public class Score {
+	 int wins;
+	 int ties;
+	 int losses;
+	public int getWins() {
+		return wins;
+	}
+	public void setWins(int wins) {
+		this.wins = wins;
+	}
+	public int getTies() {
+		return ties;
+	}
+	public void setTies(int ties) {
+		this.ties = ties;
+	}
+	public int getLosses() {
+		return losses;
+	}
+	public void setLosses(int losses) {
+		this.losses = losses;
+	}
+	@Override
+	public String toString() {
+		return "Score [wins=" + wins + ", ties=" + ties + ", losses=" + losses + "]";
+	}
+	public Score(int wins, int ties, int losses) {
+		super();
+		this.wins = wins;
+		this.ties = ties;
+		this.losses = losses;
+	}
+	public Score() {
+	  	
+		// TODO Auto-generated constructor stub
+	} 
+	
+
+}
